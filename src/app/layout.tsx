@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from 'next/link';
 import { ReactNode } from 'react';
 
 const geistSans = Geist({
@@ -25,23 +24,8 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="flex min-h-screen bg-gray-50">
-        <aside className="hidden md:flex flex-col w-64 h-screen bg-white shadow-lg p-6 space-y-4 fixed">
-          <h2 className="text-2xl font-bold mb-8">Fútbol Academy</h2>
-          <nav className="flex flex-col gap-2">
-            <Link href="/dashboard" className="px-4 py-2 rounded hover:bg-blue-100">Dashboard</Link>
-            <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Teams</Link>
-            <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Players</Link>
-            <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Matches</Link>
-            <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Sessions</Link>
-            <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Messages</Link>
-          </nav>
-        </aside>
-        <div className="flex-1 md:ml-64 w-full">
-          {children}
-        </div>
-      </body>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}> 
+      <body>{children}</body>
     </html>
   );
 }

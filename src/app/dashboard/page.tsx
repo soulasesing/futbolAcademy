@@ -7,14 +7,24 @@ export default async function DashboardPage() {
   if (!session?.user) {
     redirect('/login');
   }
-  const role = (session.user as any).role || 'ADMIN';
-  const name = session.user.name || session.user.email;
+  interface SessionUser {
+    name?: string | null;
+    email?: string | null;
+    role?: string | null;
+  }
+  const user = session.user as SessionUser;
+  const role = user.role || 'ADMIN';
+  const name = user.name || user.email;
 
   const roleDashboards: Record<string, React.ReactNode> = {
     ADMIN: <div className="p-6 bg-blue-100 rounded">Admin Dashboard: Manage academies, users, and settings.</div>,
     COACH: <div className="p-6 bg-green-100 rounded">Coach Dashboard: View teams, schedule sessions, and track players.</div>,
     PLAYER: <div className="p-6 bg-yellow-100 rounded">Player Dashboard: See your stats, matches, and training progress.</div>,
-    PARENT: <div className="p-6 bg-pink-100 rounded">Parent Dashboard: Track your child's progress and communicate with coaches.</div>,
+    PARENT: (
+      <div className="p-6 bg-pink-100 rounded">
+        Parent Dashboard: Track your child&apos;s progress and communicate with coaches.
+      </div>
+    ),
   };
 
   return (
