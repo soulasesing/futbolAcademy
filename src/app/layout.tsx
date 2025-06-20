@@ -32,7 +32,7 @@ export default function RootLayout({
           <nav className="flex flex-col gap-2">
             <Link href="/dashboard" className="px-4 py-2 rounded hover:bg-blue-100">Dashboard</Link>
             <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Teams</Link>
-            <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Players</Link>
+            <Link href="/players" className="px-4 py-2 rounded hover:bg-blue-100">Players</Link>
             <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Matches</Link>
             <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Sessions</Link>
             <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Messages</Link>
