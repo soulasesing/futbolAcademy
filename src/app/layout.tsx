@@ -31,6 +31,7 @@ export default function RootLayout({
           <h2 className="text-2xl font-bold mb-8">Fútbol Academy</h2>
           <nav className="flex flex-col gap-2">
             <Link href="/dashboard" className="px-4 py-2 rounded hover:bg-blue-100">Dashboard</Link>
+            <Link href="/coaches" className="px-4 py-2 rounded hover:bg-blue-100">Coaches</Link>
             <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Teams</Link>
             <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Players</Link>
             <Link href="#" className="px-4 py-2 rounded hover:bg-blue-100">Matches</Link>
