@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Academy {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  users       User[]
+  teams       Team[]
+}
+
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  emailVerified DateTime?
+  password      String
+  role          Role
+  academyId     String
+  academy       Academy  @relation(fields: [academyId], references: [id])
+  playerProfile Player?
+  messages      Message[] @relation("UserMessages")
+  sentMessages  Message[] @relation("SenderMessages")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  COACH
+  PLAYER
+  PARENT
+}
+
+model Team {
+  id         String   @id @default(uuid())
+  name       String
+  academyId  String
+  academy    Academy  @relation(fields: [academyId], references: [id])
+  players    Player[]
+  matches    Match[]
+  sessions   Session[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Player {
+  id         String   @id @default(uuid())
+  userId     String   @unique
+  user       User     @relation(fields: [userId], references: [id])
+  teamId     String?
+  team       Team?    @relation(fields: [teamId], references: [id])
+  stats      Json?
+  documents  Json?
+  photos     Json?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Match {
+  id         String   @id @default(uuid())
+  teamId     String
+  team       Team     @relation(fields: [teamId], references: [id])
+  opponent   String
+  date       DateTime
+  location   String?
+  result     String?
+  stats      Json?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Session {
+  id         String   @id @default(uuid())
+  teamId     String
+  team       Team     @relation(fields: [teamId], references: [id])
+  date       DateTime
+  notes      String?
+  attendance Json?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  content    String
+  senderId   String
+  sender     User     @relation("SenderMessages", fields: [senderId], references: [id])
+  userId     String
+  user       User     @relation("UserMessages", fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+}
