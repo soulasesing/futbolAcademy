@@ -1,19 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { BarChart3, Users, TrendingUp, Zap, Bell, Search, Menu, X, Settings, Home, Layers, Activity, Calendar, MessageSquare, Shield, Sparkles, Eye, DollarSign, Target, Briefcase } from 'lucide-react';
-import { signOut } from "next-auth/react";
-
-// Mock LogoutButton component
-function LogoutButton() {
-  return (
-    <button
-      onClick={() => signOut({ callbackUrl: "/login" })}
-      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition font-semibold"
-    >
-      Cerrar sesión
-    </button>
-  );
-}
+import { BarChart3, Users, TrendingUp, Bell, Search, Menu, X, Settings, Home, Activity, Calendar, MessageSquare, Sparkles, Eye, DollarSign, Target, Briefcase } from 'lucide-react';
+import LogoutButton from "./logout-button";
 
 export default function DashboardContent({ 
   role = "Admin", 
