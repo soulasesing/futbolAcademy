@@ -21,7 +21,7 @@ export default async function PlayersPage() {
           </tr>
         </thead>
         <tbody>
-          {players.map((p) => (
+          {players.map((p: any) => (
             <tr key={p.id} className="border-t">
               <td className="px-4 py-2">{p.user.name}</td>
               <td className="px-4 py-2">{p.user.email}</td>
